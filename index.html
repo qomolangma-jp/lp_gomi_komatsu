@@ -1,1 +1,491 @@
-aaaaa
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小松市 ゴミ出しガイド / Komatsu Garbage Guide</title>
+    <style>
+        :root {
+            --bg-main: #f0f4f8;
+            --text-dark: #1a202c;
+            --text-muted: #4a5568;
+            
+            /* 強烈なビジュアルインパクトのための鮮やかなグラデーション群 */
+            --hero-grad: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+            --header-grad: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            
+            --burnable-grad: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+            --plastic-grad: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+            --bin-grad: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --hazardous-grad: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            --pet-grad: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);
+            --landfill-grad: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.8;
+            padding-bottom: 60px;
+        }
+
+        /* 1. 多言語翻訳誘導バナー（最上部固定・超目立つネオンイエロー文字） */
+        .translation-banner {
+            width: 100%;
+            background: #0f172a;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 4px solid #ef4444;
+        }
+        .translation-banner .alert-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: #facc15;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+        .translation-banner .lang-sub {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        /* 全体コンテナ：PCでは大画面、スマホではコンパクトに */
+        .main-container {
+            width: 100%;
+            max-width: 1200px; /* 大画面PCでの見栄えを担保 */
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* 圧倒的プレミアム感のメインヘッダー */
+        header {
+            text-align: center;
+            padding: 50px 24px;
+            background: var(--header-grad);
+            color: white;
+            border-radius: 0 0 32px 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        header p {
+            font-size: 18px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        /* 2. 【最重要エリア】3つの絶対ルール（超巨大な横長ヒーローパネル） */
+        .hero-rules-panel {
+            background: var(--hero-grad);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 24px;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 40px rgba(239, 68, 68, 0.3);
+        }
+        .hero-rules-panel h2 {
+            font-size: 26px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        
+        /* PC時は3列、スマホ時は1列に並ぶルールアイテム */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .rules-grid {
+                grid-template-columns: repeat(3, 1fr); /* PC大画面対応 */
+            }
+        }
+        
+        .rule-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .rule-card .icon-circle {
+            font-size: 40px;
+            background: white;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 16px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .rule-card .rule-title {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+        .rule-card .rule-desc {
+            font-size: 14px;
+            color: #fff0f0;
+            font-weight: 600;
+        }
+
+        /* セクションタイトル */
+        .section-headline {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin: 50px 0 30px 0;
+            text-align: center;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .section-headline::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 5px;
+            background: #2563eb;
+            margin: 12px auto 0 auto;
+            border-radius: 3px;
+        }
+
+        /* 3. 【劇的ビジュアル改善】PCでは美しく並び、スマホでは縦に並ぶ多機能グリッド */
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        @media (min-width: 768px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr); /* タブレット・中画面PC */
+            }
+        }
+        @media (min-width: 1024px) {
+            .category-grid {
+                grid-template-columns: repeat(3, 1fr); /* 大画面PC対応でダイナミックに配置 */
+            }
+        }
+
+        /* 各ゴミカテゴリーカードのデザイン極大化 */
+        .garbage-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .garbage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        /* ヘッダーのグラデーション化 */
+        .garbage-card .card-banner {
+            padding: 24px;
+            color: white;
+            font-size: 24px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .garbage-card.burnable .card-banner { background: var(--burnable-grad); }
+        .garbage-card.plastic .card-banner { background: var(--plastic-grad); }
+        .garbage-card.bin .card-banner { background: var(--bin-grad); }
+        .garbage-card.hazardous .card-banner { background: var(--hazardous-grad); }
+        .garbage-card.pet .card-banner { background: var(--pet-grad); }
+        .garbage-card.landfill .card-banner { background: var(--landfill-grad); }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        /* 出し方・対象の表示ボックス（高級感のある配色） */
+        .info-badge-box {
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-left: 6px solid #ccc;
+        }
+        .garbage-card.burnable .info-badge-box { border-left-color: #f97316; background: #fff7ed; }
+        .garbage-card.plastic .info-badge-box { border-left-color: #0ea5e9; background: #f0f9ff; }
+        .garbage-card.bin .info-badge-box { border-left-color: #10b981; background: #ecfdf5; }
+        .garbage-card.hazardous .info-badge-box { border-left-color: #8b5cf6; background: #f5f3ff; }
+        .garbage-card.pet .info-badge-box { border-left-color: #14b8a6; background: #f0fdfa; }
+        .garbage-card.landfill .info-badge-box { border-left-color: #64748b; background: #f8fafc; }
+
+        .info-badge-title {
+            font-weight: 900;
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+        }
+        .info-badge-text {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* 箇条書きのテキストサイズを大きくし、要素同士をゆったり配置 */
+        .rules-list {
+            list-style: none;
+        }
+        .rules-list-item {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .rules-list-item:last-child {
+            margin-bottom: 0;
+        }
+        .rules-list-item::before {
+            content: "🔶";
+            position: absolute;
+            left: 2px;
+            top: 1px;
+            font-size: 14px;
+        }
+
+        .text-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 14px;
+            margin: 0 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .garbage-card.burnable .text-badge { background: #ffedd5; color: #ea580c; }
+        .garbage-card.bin .text-badge { background: #dcfce7; color: #059669; }
+
+        /* 注意・警告メッセージの超絶強化バナー */
+        .danger-alert-banner {
+            background-color: #fef2f2;
+            border: 2px dashed #ef4444;
+            color: #b91c1c;
+            padding: 16px;
+            border-radius: 14px;
+            margin-top: 20px;
+            font-size: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.08);
+        }
+        .danger-alert-banner.orange-mode {
+            background-color: #fff7ed;
+            border-color: #f97316;
+            color: #c2410c;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.08);
+        }
+        .danger-icon {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        /* 洗練されたプレミアムフッター */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 24px;
+            background: #1e2937;
+            color: #94a3b8;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        footer p.source-credit {
+            color: #f3f4f6;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="translation-banner">
+        <p class="alert-title">🌐 ブラウザの翻訳機能をご利用ください</p>
+        <p class="lang-sub">Please use your browser's translation feature. / 请使用浏览器的翻译功能。 / Vui lòng sử dụng chức năng dịch của trình duyệt. / Por favor, use a função de tradução do seu navegador.</p>
+    </div>
+
+    <div class="main-container">
+        
+        <header>
+            <h1>小松市 ゴミ出しルール</h1>
+            <p>🗺️ スマートフォン＆PC対応 スマートガイド</p>
+        </header>
+
+        <div class="hero-rules-panel">
+            <h2>⚠️ 3つの絶対ルール / 3 RULES</h2>
+            <div class="rules-grid">
+                
+                <div class="rule-card">
+                    <div class="icon-circle">🛍️</div>
+                    <div class="rule-title">指定袋を使用</div>
+                    <div class="rule-desc">小松市指定のゴミ袋を必ず使ってください。<br>(別の袋は回収されません ❌)</div>
+                </div>
+                
+                <div class="rule-card">
+                    <div class="icon-circle">✍️</div>
+                    <div class="rule-title">名前を記入</div>
+                    <div class="rule-desc">ゴミ袋に自分の名前をハッキリ書いてください。<br>(名前がないと回収されません ❌)</div>
+                </div>
+                
+                <div class="rule-card">
+                    <div class="icon-circle">⏰</div>
+                    <div class="rule-title">朝 8:30 厳守</div>
+                    <div class="rule-desc">朝8時30分までに出してください。<br>(遅れたら絶対に出さないでください ❌)</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-headline">ゴミの分別と出し方</div>
+
+        <div class="category-grid">
+            
+            <div class="garbage-card burnable">
+                <div class="card-banner">
+                    <span>🔥 可燃ごみ (Burnable)</span>
+                </div>
+                <div class="card-content">
+                    <div class="info-badge-box">
+                        <div class="info-badge-title">🛍️ 出し方の基本</div>
+                        <div class="info-badge-text">「もやすごみ専用」の指定袋に入れること。</div>
+                    </div>
+                    <ul class="rules-list">
+                        <li class="rules-list-item"><strong>対象：</strong>生ごみ 🐟、紙くず 📄、衣類 👕、汚れの落ちないプラスチック・発泡スチロール 📦 など。</li>
+                        <li class="rules-list-item"><strong>草・葉 🍂：</strong>1回につき <span class="text-badge">2袋まで</span> 出せます。</li>
+                        <li class="rules-list-item"><strong>木の枝・板 🪵：</strong>長さ50cm以内、直径10cm以内にして紐で縛れば、<span class="text-badge">袋は不要</span> です。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="garbage-card plastic">
+                <div class="card-banner">
+                    <span>🧴 プラスチック製容器包装</span>
+                </div>
+                <div class="card-content">
+                    <div class="info-badge-box">
+                        <div class="info-badge-title">♺ 対象となるもの</div>
+                        <div class="info-badge-text">食品トレー 🍱、お菓子の袋 🍬、シャンプー等の容器 🧼 (プラマークあり)</div>
+                    </div>
+                    <ul class="rules-list">
+                        <li class="rules-list-item"><strong>出し方：</strong>「さっと水洗い」して「しっかり水切り」をする 💧</li>
+                    </ul>
+                    <div class="danger-alert-banner">
+                        <span class="danger-icon">🚫</span>
+                        <div><strong>二重袋は絶対禁止！</strong><br>袋の中にさらに袋を入れる行為は絶対にやめてください。</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="garbage-card bin">
+                <div class="card-banner">
+                    <span>🍾 空きビン (Glass Bottles)</span>
+                </div>
+                <div class="card-content">
+                    <div class="info-badge-box">
+                        <div class="info-badge-title">🎨 色ごとの分別</div>
+                        <div class="info-badge-text"><span class="text-badge">透明</span><span class="text-badge">茶色</span><span class="text-badge">黒色</span><span class="text-badge">その他の色</span> の4色に分けて箱に入れます。</div>
+                    </div>
+                    <ul class="rules-list">
+                        <li class="rules-list-item"><strong>出し方：</strong>中を水で洗い、フタ（キャップ）は必ず外す。</li>
+                    </ul>
+                    <div class="danger-alert-banner">
+                        <span class="danger-icon">⚠️</span>
+                        <div>割れたビン、化粧品や薬のビンはここには出せません！（埋立ごみへ）</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="garbage-card hazardous">
+                <div class="card-banner">
+                    <span>⚠️ 有害ごみ (Hazardous)</span>
+                </div>
+                <div class="card-content">
+                    <ul class="rules-list">
+                        <li class="rules-list-item"><strong>蛍光灯 💡：</strong>割れないよう、買ったときの箱やケースに入れて出してください。</li>
+                        <li class="rules-list-item"><strong>電球・乾電池・体温計・ライター 🔋：</strong>袋には入れず、専用の箱にそのまま直接入れます。</li>
+                    </ul>
+                    <div class="danger-alert-banner orange-mode">
+                        <span class="danger-icon">🏪</span>
+                        <div>ボタン電池や充電式電池（モバイルバッテリーなど）は、お店のリサイクルボックスへ返却してください。</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="garbage-card pet">
+                <div class="card-banner">
+                    <span>🥤 ペットボトル (PET Bottles)</span>
+                </div>
+                <div class="card-content">
+                    <div class="info-badge-box">
+                        <div class="info-badge-title">✂️ 3ステップ</div>
+                        <div class="info-badge-text">キャップとラベルを外す ➡️ 水洗いする ➡️ つぶす</div>
+                    </div>
+                    <ul class="rules-list">
+                        <li class="rules-list-item">外したキャップとラベルは「プラスチック製容器包装」へ出してください。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="garbage-card landfill">
+                <div class="card-banner">
+                    <span>🏺 埋立ごみ (Landfill)</span>
+                </div>
+                <div class="card-content">
+                    <ul class="rules-list">
+                        <li class="rules-list-item"><strong>対象：</strong>化粧品のビン 💄、ガラス製品 🥛、陶器類（お皿など）🍽️。</li>
+                    </ul>
+                    <div class="danger-alert-banner orange-mode">
+                        <span class="danger-icon">🚨</span>
+                        <div><strong>けが防止の注意：</strong>割れたガラス・陶器、くぎ・針は紙に包んで「危険」と書いて出してください。</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p class="source-credit">苗代地区連合町内会 - 小松市のごみ出しルール資料を基に作成</p>
+            <p>© 2026 Komatsu City Garbage Disposal Guide. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
